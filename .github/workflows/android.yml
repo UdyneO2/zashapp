@@ -31,11 +31,13 @@ jobs:
         run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
 
       - name: Set Up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu' # See 'Supported distributions' for available options
-          java-version: '17'
-          cache: 'gradle'
+        run: |
+            sudo apt update && sudo apt install openjdk-17-jdk
+            echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" > ~/.bashrc
+           echo "export PATH=$JAVA_HOME/bin:$PATH" > ~/.bashrc
+           source ~/.bashrc
+           java --version
+           
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
