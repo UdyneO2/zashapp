@@ -69,25 +69,26 @@ jobs:
            -storepass testkey \
            -keypass testkey \
            -dname "CN=Udyne OS, OU=Development, O=Udyne Technologies, L=Jakarta, ST=DKI Jakarta, C=ID"
-      - name: Build gradle project + debug
+      - name: Build gradle
         run: |
            ./gradlew clean
            ./gradlew build
 
       # Create APK Release
-      - name: Build apk release project (APK) - ${{ env.main_project_module }} module
+      - name: Build apk release project (APK) - ${{ env.main_project_module }}
         run: |
            ./gradlew :app:assembleRelease
+           cp app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release-signed.apk
            ~/Android/Sdk/build-tools/34.0.0/apksigner sign \
            --ks zashapp-release.jks \
            --ks-pass pass:testkey \
            --key-pass pass:testkey \
-           app/build/outputs/apk/release/app-release-unsigned.apk
+           app/build/outputs/apk/release/app-release-signed.apk
            
       # Upload Artifact Build
       # Noted For Output [main_project_module]/build/outputs/apk/release/
       - name: Upload APK Release - ${{ env.repository_name }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) release generated
+          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - Release
           path: app/build/outputs/apk/release/
