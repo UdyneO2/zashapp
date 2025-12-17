@@ -39,12 +39,20 @@ jobs:
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
+      
+      - name: Install SDK
+        run: |
+           yes | ~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+           ~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+           ls ~/Android/Sdk/platforms/
+           ls ~/Android/Sdk/build-tools/
+           echo "sdk.dir=/home/$(whoami)/Android/Sdk" > local.properties
 
       # Run Build Project
       - name: Build gradle project + debug
         run: |
            ./gradlew clean
-           ./gradlew build --stacktrace --info
+           ./gradlew build
 
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
