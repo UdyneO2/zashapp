@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
 
     private void loadInitialUrl() {
         if (isNetworkAvailable()) {
-            mWebView.loadUrl("https://127.0.0.1:9090/ui");
+            mWebView.loadUrl("http://127.0.0.1:9090/ui");
         } else {
             mWebView.loadUrl("file:///android_asset/offline.html");
         }
@@ -348,7 +348,7 @@ public class MainActivity extends Activity {
             public void onAvailable(Network network) {
                 runOnUiThread(() -> {
                     if (mWebView != null && !mWebView.getUrl().startsWith("file:///android_asset")) {
-                        mWebView.loadUrl("https://127.0.0.1:9090/ui");
+                        mWebView.loadUrl("http://127.0.0.1:9090/ui");
                     }
                 });
             }

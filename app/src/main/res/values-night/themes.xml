@@ -9,9 +9,6 @@
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
-        <color name="refresh_color1">#FF000000</color>
-        <color name="refresh_color2">#FFFFFFFF</color>
-        <color name="refresh_color3">#FF03DAC5</color>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
