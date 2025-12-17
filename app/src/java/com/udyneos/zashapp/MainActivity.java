@@ -1,4 +1,4 @@
-package com.udyneos.zashboard;
+package com.udyneos.zashapp;
 
 import android.app.Activity;
 import android.content.Intent;

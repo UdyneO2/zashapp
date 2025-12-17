@@ -4,7 +4,7 @@ Struktur Aplikasi
 ├── app/
 │   ├── src/main/
 │   │   ├── AndroidManifest.xml
-│   │   └── java/com/udyneos/zashboard/MainActivity.java
+│   │   └── java/com/udyneos/zashapp/MainActivity.java
 │   └── build.gradle
 ├── build.gradle
 └── settings.gradle

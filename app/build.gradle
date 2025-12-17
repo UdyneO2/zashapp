@@ -3,10 +3,10 @@ plugins {
 }
 
 android {
-    compileSdk 34 // Standar Android 14/13
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.udyneos.zashboard"
+        applicationId "com.udyneos.zashapp"
         minSdk 21
         targetSdk 34
         versionCode 1
