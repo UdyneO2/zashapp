@@ -2,7 +2,7 @@ name: Build APK - Beta
 
 env:
   # The name of the main module repository
-  main_project_module: Zashapp
+  main_project_module: zashapp
 
   # The name of the Play Store
   playstore_name: Udyneos ID
@@ -45,14 +45,14 @@ jobs:
       # Run Build Project
       - name: Build gradle project + debug
         run: |
+          ./gradlew clean
           ./gradlew build
           ./gradlew --version
-          ./gradlew tasks --all
-          ./gradlew projects
+          ./gradlew tasks
 
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
-        run: ./gradlew zashapp
+        run: ./gradlew assemble
 
       # Upload Artifact Build
 
