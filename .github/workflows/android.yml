@@ -42,6 +42,14 @@ jobs:
       
       - name: Install SDK
         run: |
+           rm -rf ~/Android/Sdk
+           mkdir -p ~/Android/Sdk/cmdline-tools/latest
+           cd ~/Android/Sdk
+           wget -q https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -O tools.zip
+           unzip -q tools.zip -d cmdline-tools/latest
+           mv cmdline-tools/latest/cmdline-tools/* cmdline-tools/latest/
+           rmdir cmdline-tools/latest/cmdline-tools
+           rm tools.zip
            yes | ~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
            ~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
            ls ~/Android/Sdk/platforms/
