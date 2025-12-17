@@ -299,23 +299,23 @@ public class MainActivity extends Activity {
     
     // Inject JavaScript untuk file upload support
     private void injectFileUploadSupport(WebView webView) {
-        String js = """
-            // Enhance file input click handling
-            document.addEventListener('click', function(e) {
-                if (e.target.type === 'file') {
-                    e.target.addEventListener('change', function() {
-                        console.log('File selected: ', this.files.length + ' files');
-                    });
-                }
-            });
-            
-            // Make sure all file inputs are visible
-            var style = document.createElement('style');
-            style.textContent = 'input[type="file"] { opacity: 1 !important; visibility: visible !important; }';
-            document.head.appendChild(style);
-            
-            console.log('File upload support injected');
-            """;
+        String js = new StringBuilder()
+        .append("// Enhance file input click handling\n")
+        .append("document.addEventListener('click', function(e) {\n")
+        .append("    if (e.target.type === 'file') {\n")
+        .append("        e.target.addEventListener('change', function() {\n")
+        .append("            console.log('File selected: ', this.files.length + ' files');\n")
+        .append("        });\n")
+        .append("    }\n")
+        .append("});\n")
+        .append("\n")
+        .append("// Make sure all file inputs are visible\n")
+        .append("var style = document.createElement('style');\n")
+        .append("style.textContent = 'input[type=\"file\"] { opacity: 1 !important; visibility: visible !important; }';\n")
+        .append("document.head.appendChild(style);\n")
+        .append("\n")
+        .append("console.log('File upload support injected');")
+        .toString();
         
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             webView.evaluateJavascript(js, null);
@@ -323,13 +323,13 @@ public class MainActivity extends Activity {
     }
 
     private void injectLightModeCSS(WebView webView) {
-        String css = ":root { color-scheme: light only; } body { background-color: white !important; color: black !important; }";
-        String js = "var style = document.createElement('style'); style.textContent = `" + css + "`; document.head.appendChild(style);";
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            webView.evaluateJavascript(js, null);
-        }
+    String css = ":root { color-scheme: light only; } body { background-color: white !important; color: black !important; }";
+    String js = "var style = document.createElement('style'); style.textContent = `" + css + "`; document.head.appendChild(style);";
+    
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        webView.evaluateJavascript(js, null);
     }
+}
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
