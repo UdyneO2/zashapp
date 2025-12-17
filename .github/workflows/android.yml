@@ -43,12 +43,16 @@ jobs:
         run: chmod +x ./gradlew
 
       # Run Build Project
-      - name: Build gradle project
-        run: ./gradlew build
+      - name: Build gradle project + debug
+        run: |
+          ./gradlew build
+          ./gradlew --version
+          ./gradlew tasks --all
+          ./gradlew projects
 
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
-        run: ./gradlew assemble
+        run: ./gradlew zashapp
 
       # Upload Artifact Build
 
