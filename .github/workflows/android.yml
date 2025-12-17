@@ -46,7 +46,7 @@ jobs:
       - name: Build gradle project + debug
         run: |
           ./gradlew clean
-          ./gradlew build --debug
+          ./gradlew build
 
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
