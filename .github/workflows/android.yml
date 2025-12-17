@@ -49,7 +49,7 @@ jobs:
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
         run: |
-           ./gradlew assembleRelease
+           ./gradlew :app:assembleRelease
 
       # Upload Artifact Build
 
