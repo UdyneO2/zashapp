@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
         });
 
         // Memuat URL Lokal
-        webView.loadUrl("http://127.0.0.1:9090/ui");
+        webView.loadUrl("https://127.0.0.1:9090/ui");
     }
 
     // Menangani hasil dari pemilihan file/galeri
