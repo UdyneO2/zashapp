@@ -45,13 +45,13 @@ jobs:
       # Run Build Project
       - name: Build gradle project + debug
         run: |
-          ./gradlew clean
-          ./gradlew build
+           ./gradlew clean
+           ./gradlew build --stacktrace --info
 
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
         run: |
-           ./gradlew :zashapp:assembleRelease
+           ./gradlew assembleRelease
 
       # Upload Artifact Build
 
