@@ -51,7 +51,6 @@ jobs:
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
         run: |
-           ./gradlew assemble --debug
            ./gradlew :zashapp:assembleRelease
 
       # Upload Artifact Build
