@@ -1,135 +1,112 @@
 package com.udyneos.zashapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
+import android.app.DownloadManager;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.ConnectivityManager.NetworkCallback;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
+import android.os.Environment;
+import android.webkit.CookieManager;
+import android.webkit.URLUtil;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
-    private WebView webView;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private ValueCallback<Uri[]> uploadMessage;
-    private final static int FILE_CHOOSER_RESULT_CODE = 1;
+    private WebView mWebView;
+    private NetworkCallback networkCallback;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        // Menggunakan layout XML
         setContentView(R.layout.activity_main);
-        
-        // Inisialisasi SwipeRefreshLayout
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        
-        // Inisialisasi WebView dari layout
-        webView = findViewById(R.id.webView);
 
-        // Konfigurasi WebView
-        WebSettings settings = webView.getSettings();
-        
-        settings.setJavaScriptEnabled(true);
-        settings.setDomStorageEnabled(true); 
-        settings.setDatabaseEnabled(true);
-        settings.setJavaScriptCanOpenWindowsAutomatically(true);
-        
-        settings.setAllowFileAccess(true);
-        settings.setAllowContentAccess(true);
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        mWebView = findViewById(R.id.activity_main_webview);
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(new HelloWebViewClient());
+
+        mWebView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+            request.setMimeType(mimetype);
+            request.addRequestHeader("cookie", CookieManager.getInstance().getCookie(url));
+            request.addRequestHeader("User-Agent", userAgent);
+            request.setDescription("Downloading file...");
+            request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimetype));
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimetype));
+            DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+            dm.enqueue(request);
+            Toast.makeText(getApplicationContext(), "Downloading File", Toast.LENGTH_LONG).show();
+        });
+
+        if (isNetworkAvailable()) {
+            mWebView.loadUrl("https://127.0.0.1:9090/ui");
+        } else {
+            mWebView.loadUrl("file:///android_asset/offline.html");
         }
 
-        // Setup WebViewClient
-        webView.setWebViewClient(new WebViewClient() {
+        networkCallback = new NetworkCallback() {
             @Override
-            public void onPageFinished(WebView view, String url) {
-                // Hentikan animasi refresh ketika halaman selesai dimuat
-                swipeRefreshLayout.setRefreshing(false);
-                super.onPageFinished(view, url);
+            public void onAvailable(Network network) {
+                runOnUiThread(() -> {
+                    if (!mWebView.getUrl().startsWith("file:///android_asset")) {
+                        mWebView.loadUrl("https://127.0.0.1:9090/ui");
+                    }
+                });
             }
-            
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                // Tangani link eksternal
-                if (url.startsWith("http://") || url.startsWith("https://")) {
-                    view.loadUrl(url);
-                    return false;
-                }
-                return true;
+            public void onLost(Network network) {
+                runOnUiThread(() -> {
+                    if (mWebView.getUrl() != null) {
+                        mWebView.loadUrl("file:///android_asset/offline.html");
+                    }
+                });
             }
-        });
-        
-        // Setup WebChromeClient untuk file upload
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
-                if (uploadMessage != null) uploadMessage.onReceiveValue(null);
-                uploadMessage = filePathCallback;
-                
-                Intent intent = fileChooserParams.createIntent();
-                try {
-                    startActivityForResult(intent, FILE_CHOOSER_RESULT_CODE);
-                } catch (Exception e) {
-                    uploadMessage = null;
-                    return false;
-                }
-                return true;
-            }
-            
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                // Optional: Tampilkan progress loading
-                if (newProgress < 100) {
-                    swipeRefreshLayout.setRefreshing(true);
-                } else {
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            }
-        });
-
-        // Setup SwipeRefreshLayout
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Refresh WebView
-                webView.reload();
-            }
-        });
-        
-        // Warna animasi refresh (optional)
-        swipeRefreshLayout.setColorSchemeResources(
-            android.R.color.holo_blue_bright,
-            android.R.color.holo_green_light,
-            android.R.color.holo_orange_light,
-            android.R.color.holo_red_light
-        );
-
-        // Memuat URL Lokal
-        webView.loadUrl("http://127.0.0.1:9090/ui");
+        };
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectivityManager.registerDefaultNetworkCallback(networkCallback);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FILE_CHOOSER_RESULT_CODE) {
-            if (uploadMessage == null) return;
-            uploadMessage.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode, data));
-            uploadMessage = null;
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network nw = connectivityManager.getActiveNetwork();
+        if (nw == null) return false;
+        NetworkCapabilities actNw = connectivityManager.getNetworkCapabilities(nw);
+        return actNw != null && (actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_VPN));
+    }
+
+    private static class HelloWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            view.loadUrl(request.getUrl().toString());
+            return true;
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
+        if (mWebView.canGoBack()) {
+            mWebView.goBack();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (networkCallback != null) {
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            connectivityManager.unregisterNetworkCallback(networkCallback);
         }
     }
 }
