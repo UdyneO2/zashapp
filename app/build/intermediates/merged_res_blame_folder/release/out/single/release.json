@@ -8,6 +8,10 @@
         "source": "com.udyneos.zashboard.app-main-36:/layout/activity_main.xml"
     },
     {
+        "merged": "com.udyneos.zashboard.app-merged_res-35:/layout_fragment_dashboard.xml.flat",
+        "source": "com.udyneos.zashboard.app-main-36:/layout/fragment_dashboard.xml"
+    },
+    {
         "merged": "com.udyneos.zashboard.app-merged_res-35:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "com.udyneos.zashboard.app-main-36:/mipmap-xxxhdpi/ic_launcher_round.png"
     },
@@ -38,6 +42,10 @@
     {
         "merged": "com.udyneos.zashboard.app-merged_res-35:/drawable_ic_launcher_foreground.xml.flat",
         "source": "com.udyneos.zashboard.app-main-36:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.udyneos.zashboard.app-merged_res-35:/layout_fragment_control.xml.flat",
+        "source": "com.udyneos.zashboard.app-main-36:/layout/fragment_control.xml"
     },
     {
         "merged": "com.udyneos.zashboard.app-merged_res-35:/mipmap-hdpi_ic_launcher_round.png.flat",

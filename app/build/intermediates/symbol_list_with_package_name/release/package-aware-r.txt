@@ -3225,8 +3225,6 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
-id btn_connect
-id btn_disconnect
 id btn_open_browser
 id buttonPanel
 id cache_measures
@@ -3446,7 +3444,6 @@ id navigation_bar_item_labels_group
 id navigation_bar_item_large_label_view
 id navigation_bar_item_small_label_view
 id navigation_header_container
-id nested_scroll_view
 id never
 id neverCompleteToEnd
 id neverCompleteToStart
@@ -3571,7 +3568,9 @@ id stretch
 id submenuarrow
 id submit_area
 id supportScrollUp
+id switch_connection
 id tabMode
+id tab_layout
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
 id tag_accessibility_heading
@@ -3606,7 +3605,6 @@ id title
 id titleDividerNoCustom
 id title_template
 id toggle
-id toolbar
 id top
 id topPanel
 id touch_outside
@@ -3625,6 +3623,7 @@ id up
 id useLogo
 id vertical_only
 id view_offset_helper
+id view_pager
 id view_transition
 id view_tree_lifecycle_owner
 id view_tree_on_back_pressed_dispatcher_owner
@@ -3774,6 +3773,8 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_add_server
+layout fragment_control
+layout fragment_dashboard
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_chip

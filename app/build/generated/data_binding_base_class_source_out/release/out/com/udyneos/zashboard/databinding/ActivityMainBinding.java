@@ -4,20 +4,13 @@ package com.udyneos.zashboard.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.textfield.TextInputEditText;
+import androidx.viewpager2.widget.ViewPager2;
+import com.google.android.material.tabs.TabLayout;
 import com.udyneos.zashboard.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -25,86 +18,24 @@ import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final CoordinatorLayout rootView;
+  private final LinearLayout rootView;
 
   @NonNull
-  public final MaterialButton btnConnect;
+  public final TabLayout tabLayout;
 
   @NonNull
-  public final MaterialButton btnDisconnect;
+  public final ViewPager2 viewPager;
 
-  @NonNull
-  public final MaterialButton btnOpenBrowser;
-
-  @NonNull
-  public final Chip chipAdd;
-
-  @NonNull
-  public final ChipGroup chipGroup;
-
-  @NonNull
-  public final Chip chipLocalhost;
-
-  @NonNull
-  public final TextInputEditText etHostname;
-
-  @NonNull
-  public final TextInputEditText etPort;
-
-  @NonNull
-  public final TextInputEditText etSecret;
-
-  @NonNull
-  public final NestedScrollView nestedScrollView;
-
-  @NonNull
-  public final ProgressBar progressBar;
-
-  @NonNull
-  public final TextView statusDetail;
-
-  @NonNull
-  public final View statusIndicator;
-
-  @NonNull
-  public final TextView statusText;
-
-  @NonNull
-  public final Toolbar toolbar;
-
-  @NonNull
-  public final WebView webView;
-
-  private ActivityMainBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull MaterialButton btnConnect, @NonNull MaterialButton btnDisconnect,
-      @NonNull MaterialButton btnOpenBrowser, @NonNull Chip chipAdd, @NonNull ChipGroup chipGroup,
-      @NonNull Chip chipLocalhost, @NonNull TextInputEditText etHostname,
-      @NonNull TextInputEditText etPort, @NonNull TextInputEditText etSecret,
-      @NonNull NestedScrollView nestedScrollView, @NonNull ProgressBar progressBar,
-      @NonNull TextView statusDetail, @NonNull View statusIndicator, @NonNull TextView statusText,
-      @NonNull Toolbar toolbar, @NonNull WebView webView) {
+  private ActivityMainBinding(@NonNull LinearLayout rootView, @NonNull TabLayout tabLayout,
+      @NonNull ViewPager2 viewPager) {
     this.rootView = rootView;
-    this.btnConnect = btnConnect;
-    this.btnDisconnect = btnDisconnect;
-    this.btnOpenBrowser = btnOpenBrowser;
-    this.chipAdd = chipAdd;
-    this.chipGroup = chipGroup;
-    this.chipLocalhost = chipLocalhost;
-    this.etHostname = etHostname;
-    this.etPort = etPort;
-    this.etSecret = etSecret;
-    this.nestedScrollView = nestedScrollView;
-    this.progressBar = progressBar;
-    this.statusDetail = statusDetail;
-    this.statusIndicator = statusIndicator;
-    this.statusText = statusText;
-    this.toolbar = toolbar;
-    this.webView = webView;
+    this.tabLayout = tabLayout;
+    this.viewPager = viewPager;
   }
 
   @Override
   @NonNull
-  public CoordinatorLayout getRoot() {
+  public LinearLayout getRoot() {
     return rootView;
   }
 
@@ -129,106 +60,19 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btn_connect;
-      MaterialButton btnConnect = ViewBindings.findChildViewById(rootView, id);
-      if (btnConnect == null) {
+      id = R.id.tab_layout;
+      TabLayout tabLayout = ViewBindings.findChildViewById(rootView, id);
+      if (tabLayout == null) {
         break missingId;
       }
 
-      id = R.id.btn_disconnect;
-      MaterialButton btnDisconnect = ViewBindings.findChildViewById(rootView, id);
-      if (btnDisconnect == null) {
+      id = R.id.view_pager;
+      ViewPager2 viewPager = ViewBindings.findChildViewById(rootView, id);
+      if (viewPager == null) {
         break missingId;
       }
 
-      id = R.id.btn_open_browser;
-      MaterialButton btnOpenBrowser = ViewBindings.findChildViewById(rootView, id);
-      if (btnOpenBrowser == null) {
-        break missingId;
-      }
-
-      id = R.id.chip_add;
-      Chip chipAdd = ViewBindings.findChildViewById(rootView, id);
-      if (chipAdd == null) {
-        break missingId;
-      }
-
-      id = R.id.chip_group;
-      ChipGroup chipGroup = ViewBindings.findChildViewById(rootView, id);
-      if (chipGroup == null) {
-        break missingId;
-      }
-
-      id = R.id.chip_localhost;
-      Chip chipLocalhost = ViewBindings.findChildViewById(rootView, id);
-      if (chipLocalhost == null) {
-        break missingId;
-      }
-
-      id = R.id.et_hostname;
-      TextInputEditText etHostname = ViewBindings.findChildViewById(rootView, id);
-      if (etHostname == null) {
-        break missingId;
-      }
-
-      id = R.id.et_port;
-      TextInputEditText etPort = ViewBindings.findChildViewById(rootView, id);
-      if (etPort == null) {
-        break missingId;
-      }
-
-      id = R.id.et_secret;
-      TextInputEditText etSecret = ViewBindings.findChildViewById(rootView, id);
-      if (etSecret == null) {
-        break missingId;
-      }
-
-      id = R.id.nested_scroll_view;
-      NestedScrollView nestedScrollView = ViewBindings.findChildViewById(rootView, id);
-      if (nestedScrollView == null) {
-        break missingId;
-      }
-
-      id = R.id.progress_bar;
-      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
-      if (progressBar == null) {
-        break missingId;
-      }
-
-      id = R.id.status_detail;
-      TextView statusDetail = ViewBindings.findChildViewById(rootView, id);
-      if (statusDetail == null) {
-        break missingId;
-      }
-
-      id = R.id.status_indicator;
-      View statusIndicator = ViewBindings.findChildViewById(rootView, id);
-      if (statusIndicator == null) {
-        break missingId;
-      }
-
-      id = R.id.status_text;
-      TextView statusText = ViewBindings.findChildViewById(rootView, id);
-      if (statusText == null) {
-        break missingId;
-      }
-
-      id = R.id.toolbar;
-      Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
-      if (toolbar == null) {
-        break missingId;
-      }
-
-      id = R.id.web_view;
-      WebView webView = ViewBindings.findChildViewById(rootView, id);
-      if (webView == null) {
-        break missingId;
-      }
-
-      return new ActivityMainBinding((CoordinatorLayout) rootView, btnConnect, btnDisconnect,
-          btnOpenBrowser, chipAdd, chipGroup, chipLocalhost, etHostname, etPort, etSecret,
-          nestedScrollView, progressBar, statusDetail, statusIndicator, statusText, toolbar,
-          webView);
+      return new ActivityMainBinding((LinearLayout) rootView, tabLayout, viewPager);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

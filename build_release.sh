@@ -59,8 +59,7 @@ if [ -f "$RELEASE_APK" ]; then
     echo -e "${BLUE}Ukuran: ${NC}$SIZE"
     echo -e "${BLUE}Lokasi asli: ${NC}$RELEASE_APK"
     echo ""
-    echo -e "${YELLOW}Install dengan:${NC}"
-    echo "adb install -r $FINAL_APK"
+    ../go-up $FINAL_APK
 else
     echo -e "${RED}APK tidak ditemukan di $RELEASE_APK${NC}"
     exit 1
