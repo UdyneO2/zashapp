@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.udyneos.zashboard.app-mergeReleaseResources-34:/layout/item_chip.xml",
+        "source": "com.udyneos.zashboard.app-main-36:/layout/item_chip.xml"
+    },
+    {
+        "merged": "com.udyneos.zashboard.app-mergeReleaseResources-34:/layout/dialog_add_server.xml",
+        "source": "com.udyneos.zashboard.app-main-36:/layout/dialog_add_server.xml"
+    },
+    {
+        "merged": "com.udyneos.zashboard.app-mergeReleaseResources-34:/layout/activity_main.xml",
+        "source": "com.udyneos.zashboard.app-main-36:/layout/activity_main.xml"
+    }
+]

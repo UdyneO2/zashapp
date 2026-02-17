@@ -1,0 +1,23 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+/.idea/*
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+*.apk
+*.keystore
+!gradle-wrapper.jar
+/app/release
+/app/debug
+/backups
+*.log
+
+# Keystore files
+*.keystore
+keystore.properties
+*.apk

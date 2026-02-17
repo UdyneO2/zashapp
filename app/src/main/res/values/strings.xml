@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name -->
+    <string name="app_name">Zashboard Client</string>
+    <string name="app_name_full">Zashboard Dashboard Client</string>
+    
+    <!-- URLs -->
+    <string name="dashboard_url">http://localhost:9090/ui/</string>
+    <string name="github_url">https://github.com/Zephyruso/zashboard</string>
+    
+    <!-- Connection status -->
+    <string name="status_connected">Connected</string>
+    <string name="status_disconnected">Disconnected</string>
+    <string name="status_connecting">Connecting...</string>
+    <string name="status_failed">Connection Failed</string>
+    
+    <!-- Button texts -->
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="refresh">Refresh</string>
+    <string name="open_browser">Open in Browser</string>
+    <string name="apply">Apply</string>
+    <string name="reset">Reset</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    
+    <!-- Labels -->
+    <string name="hostname">Hostname / IP</string>
+    <string name="port">Port</string>
+    <string name="secret">Secret (optional)</string>
+    <string name="server_config">Server Configuration</string>
+    <string name="quick_connect">Quick Connect</string>
+    <string name="connection_status">Connection Status</string>
+    
+    <!-- Messages -->
+    <string name="no_network">No network connection</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="cache_cleared">Cache cleared</string>
+    <string name="refreshing">Refreshing...</string>
+    <string name="network_lost">Network lost</string>
+    <string name="set_to_localhost">Set to localhost:9090</string>
+    <string name="could_not_get_wifi">Could not get WiFi IP</string>
+    
+    <!-- Dialog titles -->
+    <string name="add_server">Add Custom Server</string>
+    <string name="server_options">Server Options</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+    
+    <!-- Dialog messages -->
+    <string name="add_server_message">Enter server details</string>
+    <string name="server_name_hint">Server Name (e.g., Home PC)</string>
+    <string name="server_host_hint">Hostname / IP Address</string>
+    <string name="server_port_hint">Port</string>
+    
+    <!-- Options -->
+    <string name="option_connect">Connect</string>
+    <string name="option_copy">Copy Address</string>
+    <string name="option_remove">Remove</string>
+    
+    <!-- Info -->
+    <string name="info_message">
+        Zashboard Client v%s\n\n
+        A client for Zashboard dashboard\n
+        Material You • Dynamic Colors\n\n
+        Connect to any Zashboard server:\n
+        • localhost:9090 (ADB forward)\n
+        • Custom servers via + Add\n\n
+        Features:\n
+        • WebView dashboard\n
+        • URL parameters\n
+        • Quick connect\n
+        • Cache management
+    </string>
+    
+    <!-- Font families -->
+    <string name="font_fontFamily_material">sans-serif</string>
+    <string name="font_fontFamily_medium">sans-serif-medium</string>
+    <string name="font_fontFamily_monospace">monospace</string>
+    
+    <!-- Menu items -->
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_clear_cache">Clear Cache</string>
+    <string name="menu_info">Info</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- Additional strings -->
+    <string name="hostname_required">Hostname required</string>
+    <string name="not_connected">Not connected</string>
+    <string name="ok">OK</string>
+    <string name="copy">Copy</string>
+    <string name="remove">Remove</string>
+</resources>
+
