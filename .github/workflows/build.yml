@@ -24,7 +24,7 @@ jobs:
       run: |
          chmod +x gradlew
          chmod +x generate_keystore.sh
-        ./generate_keystore.sh
+         ./generate_keystore.sh
     
     - name: Build Debug APK
       run: ./gradlew assembleDebug
