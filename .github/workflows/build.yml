@@ -20,8 +20,11 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
     
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    - name: Setup
+      run: |
+         chmod +x gradlew
+         chmod +x generate_keystore.sh
+        ./generate_keystore.sh
     
     - name: Build Debug APK
       run: ./gradlew assembleDebug
@@ -32,7 +35,7 @@ jobs:
     - name: Upload APK to Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: animex-apks
+        name: zashapp
         path: |
           app/build/outputs/apk/debug/*.apk
           app/build/outputs/apk/release/*.apk

@@ -11,50 +11,24 @@ echo -e "${GREEN}GENERATE KEYSTORE${NC}"
 echo -e "${BLUE}================================${NC}"
 
 # Hapus keystore lama jika ada
-if [ -f "release.keystore" ]; then
-    echo -e "${YELLOW}Keystore sudah ada.${NC}"
-    read -p "Hapus dan buat baru? (y/n): " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        rm -f release.keystore
-        rm -f keystore.properties
-        echo -e "${GREEN}✓ Keystore lama dihapus${NC}"
-    else
-        exit 0
-    fi
-fi
+rm -f release.keystore
+rm -f keystore.properties
+echo -e "${GREEN}✓ Keystore lama dihapus${NC}"
 
 # Input detail
 echo ""
 echo -e "${YELLOW}Masukkan detail keystore (Enter untuk default):${NC}"
 echo ""
 
-read -p "Keystore password [android]: " STORE_PASS
 STORE_PASS=${STORE_PASS:-android}
-
-read -p "Key password [android]: " KEY_PASS
 KEY_PASS=${KEY_PASS:-android}
-
-read -p "Key alias [udyneos]: " KEY_ALIAS
 KEY_ALIAS=${KEY_ALIAS:-udyneos}
-
-read -p "Your name [Udyneos]: " NAME
 NAME=${NAME:-Udyneos}
-
-read -p "Organization unit [Development]: " OU
 OU=${OU:-Development}
-
-read -p "Organization [Udyneos]: " ORG
 ORG=${ORG:-Udyneos}
-
-read -p "City/Locality [Jakarta]: " CITY
 CITY=${CITY:-Jakarta}
-
-read -p "State/Province [Jakarta]: " STATE
 STATE=${STATE:-Jakarta}
-
-read -p "Country Code (2 letters) [ID]: " COUNTRY
-COUNTRY=${COUNTRY:-ID}
+COUNTRY=ID
 
 echo ""
 echo -e "${YELLOW}Membuat keystore...${NC}"
@@ -101,14 +75,3 @@ fi
 
 echo ""
 echo -e "${GREEN}✅ SELESAI!${NC}"
-
-
-chmod +x generate_keystore.sh
-
-# Buat keystore.properties.example
-cat > keystore.properties.example << 'EOF'
-storePassword=android
-keyPassword=android
-keyAlias=udyneos
-storeFile=release.keystore
-EOF
